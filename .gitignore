@@ -1,0 +1,5 @@
+files/*
+!files/.gitkeep
+out/*
+.vscode/*
+__pycache__/*
