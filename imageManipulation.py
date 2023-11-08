@@ -4,6 +4,7 @@ from Foundation import  NSRange
 import Vision
 import Quartz
 from PIL import Image, ImageDraw
+from PIL.Image import Image as ImageType
 
 
 from common import BoxCoordinates, ImageOCR, some_value_extracted_present_on_ocr
@@ -36,7 +37,7 @@ def get_box_coordinates_from(recognized_text, input_image) -> BoxCoordinates:
 	}
 
 
-def get_draw_image_with_ocr_boxes(page_ocr: ImageOCR, array_of_results: List[str]) -> Image:
+def get_draw_image_with_ocr_boxes(page_ocr: ImageOCR, array_of_results: List[str]) -> ImageType:
 	image = Image.open(page_ocr["image_path"])
 	draw = ImageDraw.Draw(image)
 	for ocr_and_coordinates in page_ocr["ocr_and_coordinates"]:
@@ -54,3 +55,11 @@ def get_draw_image_with_ocr_boxes(page_ocr: ImageOCR, array_of_results: List[str
 			# Draw the observation rect on the image
 		draw.rectangle([(min_x, min_y),(max_x, max_y)],outline=outline, width=3)
 	return image
+
+
+def save_images_as_pdf_to_path(images: List[ImageType], output_path: str):
+		image_as_RGB = []
+		for image in images:
+			image_as_RGB.append(image.convert('RGB'))
+		image_list = image_as_RGB[1:] 
+		image_list[0].save(output_path, save_all=True, append_images=image_list)
