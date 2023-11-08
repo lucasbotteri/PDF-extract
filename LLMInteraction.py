@@ -17,6 +17,8 @@ La fecha se extrae de una seccion que generalmente tiene la forma: `A partir del
 El output debe tener el siguiente formato:
 nombre_de_la_persona,numero_de_resolucion,numero_de_legajo,fecha_de_aplicacion
 
+No debes indicar que dato es cada uno, solo debes escribirlos en el orden indicado separados por comas
+
 Si no se encuentra alguno de los datos, se debe dejar el campo con un string "NA"
 
 """
