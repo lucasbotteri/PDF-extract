@@ -6,16 +6,16 @@ Esta resolucion explica en alguno de sus articulos que debido a alguna causa, en
 Requiero 
 - El numero de resolucion
 - el nombre de la persona a la que hace referencia el documento
-- el numero de legajo de la persona a la que hace referencia el documento
+- el numero de dni o legajo de la persona a la que hace referencia el documento
 - La fecha en la que se debe aplicar la resolucion
 
 El numero de resolucion se extrae de una seccion del documento que generalmente tiene la forma: `Numero: XXXX` al principio del documento
 El nombre se encuentra en los articulos donde explican la causa de la resolucion y a quien se le debe aplicar
-Luego se encuentra el numero de legajo, que se encuentra
+El numero de dni es un numero que identifica a la persona a la que se le debe aplicar la resolucion, en caso de no estar este numero se puede usar el numero de legajo
 La fecha se extrae de una seccion que generalmente tiene la forma: `A partir del XXXX`'
 
 El output debe tener el siguiente formato:
-nombre_de_la_persona,numero_de_resolucion,numero_de_legajo,fecha_de_aplicacion
+nombre_de_la_persona,numero_de_resolucion,numero_de_identifiacion,fecha_de_aplicacion
 
 No debes indicar que dato es cada uno, solo debes escribirlos en el orden indicado separados por comas
 

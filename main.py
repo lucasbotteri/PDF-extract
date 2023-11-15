@@ -34,24 +34,27 @@ pdf_files = [f for f in files if f.endswith('.pdf')]
 
 with open('out/output.csv', 'w') as gpt_response:
 
-    gpt_response.write('archivo, nombre_de_la_persona,numero_de_resolucion,numero_de_legajo,fecha_de_aplicacion')
+    gpt_response.write('archivo, nombre_de_la_persona,numero_de_resolucion,numero_de_identifiacion,fecha_de_aplicacion')
     gpt_response.write('\n')
     for pdf_file in pdf_files:
 
         file_path = os.path.join(folder_path, pdf_file)
         file_name_no_extension = os.path.splitext(pdf_file)[0]
-        print(f"Processing file: {file_path}")
+        print(f"_____Processing file: {file_path}_____")
 
         with tempfile.TemporaryDirectory() as path_to_save_images:
             
 
             images_paths = convert_from_path(file_path, paths_only = True, fmt="png", output_folder = path_to_save_images)
+            print(f"PDF pages converted to images")
             document_ocr = get_ocr_from_images(images_paths)
+            print(f"PDF images processed with OCR")
 
             document_text = get_text_from_ocr(document_ocr)
             trimmed_document_text = document_text.replace('\n', '').replace('\t', '')
 
             try:
+                print(f"Sending document text to GPT-3")
                 csvResponse = get_csv_from_document_text(trimmed_document_text)
                 csvResponseWithFilename = f"{pdf_file}, {csvResponse}" 
                 gpt_response.write(csvResponseWithFilename)
@@ -63,6 +66,7 @@ with open('out/output.csv', 'w') as gpt_response:
 
 
                 save_results_as_pdf(document_ocr, recognized_person_data, f"out/{file_name_no_extension}_result.pdf")
+                print(f"Results saved to out\n\n\n")
             except Exception as e:
                 logging.error(f"Error processing file {pdf_file}: {e}")
                 logging.error(traceback.format_exc())
